@@ -18,6 +18,17 @@ document.addEventListener("keypress",function(){
     }
 });
 
+// Start game on touch for mobile/tablet
+document.addEventListener("touchstart", function() {
+    if (!started) {
+        console.log("Game started via touch");
+        started = true;
+
+        setTimeout(levelUp, 500);
+    }
+}, { once: true }); // ensures it only triggers once
+
+
 function levelUp(){
     userSeq = [];
     level++;

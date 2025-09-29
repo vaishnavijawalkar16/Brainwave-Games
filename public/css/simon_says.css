@@ -30,21 +30,28 @@ body{
     background-color: white;
 }
 
-/* Media Queries for Mobile */
-@media (max-width: 768px) { /* tablets */
+/* Responsive for tablets */
+@media (max-width: 768px) {
     .btn {
-        flex: 1 1 45%;
-        max-width: 120px;
-        margin: 0.8rem;
-        font-size: 1.2rem;
+        width: 35vw;  /* 35% of viewport width */
+        height: 35vw; /* same as width to stay square */
+        max-width: 150px;
+        max-height: 150px;
+        margin: 1.5rem;
+        font-size: 1.3rem;
+        border-width: 8px;
     }
 }
 
-@media (max-width: 480px) { /* mobile phones */
+/* Responsive for mobile phones */
+@media (max-width: 480px) {
     .btn {
-        flex: 1 1 40%;
-        max-width: 90px;
-        margin: 0.5rem;
-        font-size: 1rem;
+        width: 40vw;  /* 40% of viewport width */
+        height: 40vw; /* keep square shape */
+        max-width: 120px;
+        max-height: 120px;
+        margin: 1rem;
+        font-size: 1.1rem;
+        border-width: 6px;
     }
 }
