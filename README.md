@@ -1,2 +1,4 @@
 # Brainwave-Games
-fun brain games
+Fun brain games
+
+1. added Simon says.
