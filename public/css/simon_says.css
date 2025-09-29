@@ -29,3 +29,22 @@ body{
 .flash{
     background-color: white;
 }
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) { /* tablets */
+    .btn {
+        flex: 1 1 45%;
+        max-width: 120px;
+        margin: 0.8rem;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) { /* mobile phones */
+    .btn {
+        flex: 1 1 40%;
+        max-width: 90px;
+        margin: 0.5rem;
+        font-size: 1rem;
+    }
+}
