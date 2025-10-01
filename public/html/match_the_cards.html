@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Match the Cards</title>
-    <link rel="stylesheet" href="../css/match_the_cards.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Match the Cards</title>
+  <link rel="stylesheet" href="../css/match_the_cards.css"> 
 </head>
 <body>
-    <h1>Match the Cards Game</h1>
+  <h1>Match the Cards Game</h1>
+
+  <div id="game-container">
     <div id="game-info">
-        <span id="level">Level: 1</span>
+      <span id="level">Level: 1</span>
+      <span id="timer">Time: ∞</span>
     </div>
-    <div id="game-board"></div>
+
+    <div id="game-board">
+      <!-- Cards will be dynamically added here by JS -->
+    </div>
+
     <div id="message"></div>
-    <script src="script.js"></script>
+  </div>
+
+  <script src="../js/match_the_cards.js"></script>
 </body>
 </html>

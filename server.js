@@ -13,6 +13,9 @@ app.get("/",(req,res)=>{
 app.get("/simon_says",(req,res)=>{
     res.sendFile(path.join(__dirname, "public/html", "simon_says.html"));
 })
+app.get("/match_the_cards",(req,res)=>{
+    res.sendFile(path.join(__dirname, "public/html", "match_the_cards.html"));
+})
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });

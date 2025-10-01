@@ -1,100 +1,79 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 h1 {
-    margin: 20px 0;
+  margin: 10px 0;
 }
 
 #game-info {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    font-size: 20px;
-    margin-bottom: 20px;
-    flex-wrap: wrap; /* Wrap info on small screens */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 #game-board {
-    display: grid;
-    gap: 10px;
-    justify-content: center;
-    margin: 0 auto;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Responsive columns */
+  display: grid;
+  width: 90vmin;   /* square board that fits screen */
+  height: 90vmin;  /* square board, no scroll */
+  margin: 0 auto;
+  gap: 8px;
+  border: 3px solid darkviolet;
+  border-radius: 20px;
+  background-color: #e0e0e0;
+  padding: 8px;
+  box-sizing: border-box;
 }
 
 .card {
-    width: 100%;
-    padding-top: 100%; /* Maintain square shape */
-    background-color: #1e90ff;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    color: white;
-    border-radius: 10px;
-    user-select: none;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* always square */
+  background-color: darkviolet;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s;
 }
 
 .card img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-    border-radius: 10px;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: none;
+  border-radius: 12px;
 }
 
 .card.flipped img {
-    display: block;
+  display: block;
 }
 
 .card.matched {
-    background-color: #32cd32;
-    cursor: default;
+  background-color: #32cd32;
+  cursor: default;
 }
 
-.card:hover {
-    transform: scale(1.05);
+.card:hover:not(.flipped):not(.matched) {
+  transform: scale(1.05);
 }
 
-/* Tablet view */
-@media (max-width: 1024px) {
-    #game-board {
-        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-        gap: 8px;
-    }
-    .card {
-        font-size: 1.8rem;
-    }
-    #game-info {
-        gap: 25px;
-        font-size: 18px;
-    }
-}
-
-/* Phone view */
-@media (max-width: 600px) {
-    #game-board {
-        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-        gap: 6px;
-    }
-    .card {
-        font-size: 1.5rem;
-    }
-    #game-info {
-        flex-direction: column;
-        gap: 15px;
-        font-size: 16px;
-    }
+#message {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 12px;
+  color: darkviolet;
 }

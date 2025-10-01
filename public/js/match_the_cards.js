@@ -3,35 +3,36 @@ const levelSpan = document.getElementById('level');
 const timerSpan = document.getElementById('timer');
 const messageDiv = document.getElementById('message');
 
-let level = 1;        // Overall level
-let cardPairs = 2;    // Starting number of pairs (4 cards)
-let subLevel = 1;     // Sublevel for same number of pairs
+let level = 1;
+let cardPairs = 2; 
 let timer;
 let time = 0;
 let cards = [];
 let flippedCards = [];
 let matchedPairs = 0;
 
-// Your 50 images in /images folder
 const cardImages = [
-    'images/img1.png','images/img2.png','images/img3.png','images/img4.png','images/img5.png',
-    'images/img6.png','images/img7.png','images/img8.png','images/img9.png','images/img10.png',
-    'images/img11.png','images/img12.png','images/img13.png','images/img14.png','images/img15.png',
-    'images/img16.png','images/img17.png','images/img18.png','images/img19.png','images/img20.png',
-    'images/img21.png','images/img22.png','images/img23.png','images/img24.png','images/img25.png',
-    'images/img26.png','images/img27.png','images/img28.png','images/img29.png','images/img30.png',
-    'images/img31.png','images/img32.png','images/img33.png','images/img34.png','images/img35.png',
-    'images/img36.png','images/img37.png','images/img38.png','images/img39.png','images/img40.png',
-    'images/img41.png','images/img42.png','images/img43.png','images/img44.png','images/img45.png',
-    'images/img46.png','images/img47.png','images/img48.png','images/img49.png','images/img50.png'
+  '../../images/apple.jpg','../../images/ball.jpg','../../images/bee.jpg','../../images/book.jpg','../../images/boy.jpg',
+  '../../images/bulb.jpg','../../images/car.jpg','../../images/cherry.jpg','../../images/clock.jpg','../../images/controller.jpg',
+  '../../images/cow.jpg','../../images/dog1.jpg','../../images/dog2.jpg','../../images/duck.jpg','../../images/elephant1.jpg',
+  '../../images/elephant2.jpg','../../images/fish.jpg','../../images/flower.jpg','../../images/fox.jpg','../../images/frog.jpg',
+  '../../images/giraffe.jpg','../../images/girl.jpg','../../images/horse.jpg','../../images/umbrella.jpg','../../images/guitar2.jpg',
+  '../../images/open_box.jpg','../../images/carrybag2.jpg','../../images/football.jpg','../../images/giant_air_balloon.jpg','../../images/wall_clock.jpg',
+  '../../images/camera.jpg','../../images/key.jpg','../../images/letter.jpg','../../images/guitar1.jpg','../../images/closed_box.jpg',
+  '../../images/bag.jpg','../../images/carrybag.jpg','../../images/rose.jpg','../../images/monitor.jpg','../../images/monkey.jpg',
+  '../../images/owl.jpg','../../images/panda.jpg','../../images/pig.jpg','../../images/sunflower.jpg','../../images/teddybear.jpg',
+  '../../images/tiger.jpg','../../images/tulip.jpg','../../images/watermelon.jpg','../../images/whack_the_mole_m.jpg','../../images/whack_the_mole_w.jpg',
+  '../../images/white_flower.jpg','../../images/rabbit.jpg','../../images/sheep.jpg','../../images/ship.jpg','../../images/star.jpg',
+  '../../images/sun.jpg'
 ];
 
-// Time per sublevel: more pairs = more time
-function getTimeLimit(pairs, sub) {
-    if(sub === 1) return 0; // no time first sublevel
-    let baseTime = pairs * 15; // 15 seconds per pair
-    baseTime = baseTime - (sub-2)*5; // reduce 5s per higher sublevel
-    return baseTime > 10 ? baseTime : 10; // minimum 10s
+// Time logic: more pairs → more time, but difficulty grows
+function getTimeLimit(level, pairs) {
+    if (level === 1) return 0; // no time for first level
+    let base = pairs * 15;     // base time grows with pairs
+    let penalty = Math.floor(level / 2) * 3; // every 2 levels, reduce by 3s
+    let final = base - penalty;
+    return final > 8 ? final : 8; // never go below 8 seconds
 }
 
 function startLevel() {
@@ -39,41 +40,40 @@ function startLevel() {
     flippedCards = [];
     matchedPairs = 0;
 
-    // Time for this sublevel
-    time = getTimeLimit(cardPairs, subLevel);
+    time = getTimeLimit(level, cardPairs);
     timerSpan.textContent = time > 0 ? `Time: ${time}s` : 'Time: ∞';
 
-    // Select required images for pairs
-    const numPairs = cardPairs;
-    const selectedImages = cardImages.slice(0, numPairs);
+    // Shuffle and pick random images
+    const shuffledImages = [...cardImages].sort(() => Math.random() - 0.5);
+    const selectedImages = shuffledImages.slice(0, cardPairs);
 
-    // Duplicate and shuffle
+    // Duplicate for pairs and shuffle
     cards = [...selectedImages, ...selectedImages].sort(() => Math.random() - 0.5);
 
     renderBoard(cards);
 
-    levelSpan.textContent = `Level: ${level} (Pairs: ${cardPairs}, SubLevel: ${subLevel})`;
+    levelSpan.textContent = `Level: ${level} (Pairs: ${cardPairs})`;
 
-    // Timer if time > 0
     clearInterval(timer);
-    if(time > 0){
-        timer = setInterval(()=>{
+    if (time > 0) {
+        timer = setInterval(() => {
             time--;
             timerSpan.textContent = `Time: ${time}s`;
-            if(time <= 0){
+            if (time <= 0) {
                 clearInterval(timer);
-                messageDiv.textContent = 'Time Up! Game Over!';
+                messageDiv.textContent = '⏳ Time Up! Game Over!';
                 disableBoard();
             }
         }, 1000);
     }
 }
 
-function renderBoard(cardsArray){
+function renderBoard(cardsArray) {
     gameBoard.innerHTML = '';
-    let cols = Math.ceil(Math.sqrt(cardsArray.length));
+    const cols = Math.ceil(Math.sqrt(cardsArray.length));
     gameBoard.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-    cardsArray.forEach(imgSrc=>{
+
+    cardsArray.forEach(imgSrc => {
         const card = document.createElement('div');
         card.classList.add('card');
         card.dataset.image = imgSrc;
@@ -82,59 +82,67 @@ function renderBoard(cardsArray){
         img.src = imgSrc;
         card.appendChild(img);
 
-        card.addEventListener('click', ()=>flipCard(card));
+        card.addEventListener('click', () => flipCard(card));
         gameBoard.appendChild(card);
     });
 }
 
-function flipCard(card){
-    if(flippedCards.length >= 2 || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+function flipCard(card) {
+    if (flippedCards.length >= 2 || card.classList.contains('flipped') || card.classList.contains('matched')) return;
 
     card.classList.add('flipped');
     flippedCards.push(card);
 
-    if(flippedCards.length === 2) checkMatch();
+    if (flippedCards.length === 2) checkMatch();
 }
 
-function checkMatch(){
+function checkMatch() {
     const [c1, c2] = flippedCards;
-    if(c1.dataset.image === c2.dataset.image){
+    if (c1.dataset.image === c2.dataset.image) {
         c1.classList.add('matched');
         c2.classList.add('matched');
         matchedPairs++;
         flippedCards = [];
 
-        if(matchedPairs === cards.length/2){
+        if (matchedPairs === cards.length / 2) {
             clearInterval(timer);
-            messageDiv.textContent = 'Level Complete!';
-            setTimeout(nextLevel, 1500);
+            messageDiv.textContent = '🎉 Level Complete!';
+            setTimeout(nextLevel, 1200);
         }
     } else {
-        setTimeout(()=>{
+        setTimeout(() => {
             c1.classList.remove('flipped');
             c2.classList.remove('flipped');
             flippedCards = [];
-        },1000);
+        }, 800);
     }
 }
 
-function nextLevel(){
-    subLevel++;
-    if(subLevel > 3){ // max 3 sublevels per card count
-        subLevel = 1;
-        cardPairs += 1; // increase number of pairs
-        if(cardPairs > cardImages.length) {
-            messageDiv.textContent = 'Congratulations! You completed all levels!';
-            return;
+function nextLevel() {
+    level++;
+
+    if (level <= 3) {
+        // Levels 1–3 always have 2 pairs (4 cards), just shorter times
+        cardPairs = 2;
+    } else {
+        // From level 4 onwards, increase card pairs every 2 levels
+        if (level % 2 === 0) {
+            cardPairs++;
         }
     }
-    level++;
+
+    // Prevent exceeding available images
+    if (cardPairs > cardImages.length) {
+        messageDiv.textContent = '🏆 Congratulations! You completed all levels!';
+        return;
+    }
+
     startLevel();
 }
 
-function disableBoard(){
-    document.querySelectorAll('.card').forEach(card=>{
-        card.removeEventListener('click', flipCard);
+function disableBoard() {
+    document.querySelectorAll('.card').forEach(card => {
+        card.style.pointerEvents = "none";
     });
 }
 
