@@ -35,18 +35,20 @@ li {
     padding: 15px;
     border: 2px solid darkviolet;
     border-radius: 10px;
+}
+a{
     text-decoration: none;
     color:deeppink;
     font-weight: bold;
 }
-
 li:hover {
     background-color: pink;
     cursor: pointer;
-    color:darkviolet; 
     border: 5px solid darkviolet;
 }
-
+a:hover{
+    color:darkviolet; 
+}
 /* Tablet (up to 768px) */
 @media (max-width: 768px) {
     h1 {

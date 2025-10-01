@@ -94,3 +94,12 @@ function checkHighestScore(){
     }
     document.querySelector("h3").innerHTML = `Highest Score : ${highestScore}`;
 }
+
+function changeText(event, link) {
+            link.textContent = link.textContent + " (clicked)";
+            // Let the browser continue navigation after a short delay
+            setTimeout(() => {
+                window.location.href = link.getAttribute("href");
+            }, 200);
+            event.preventDefault(); // prevent immediate navigation
+}
