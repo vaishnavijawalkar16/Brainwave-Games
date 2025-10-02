@@ -43,7 +43,6 @@ function startLevel() {
     time = getTimeLimit(level, cardPairs);
     timerSpan.textContent = time > 0 ? `Time: ${time}s` : 'Time: ∞';
 
-    // Shuffle and pick random images
     const shuffledImages = [...cardImages].sort(() => Math.random() - 0.5);
     const selectedImages = shuffledImages.slice(0, cardPairs);
 

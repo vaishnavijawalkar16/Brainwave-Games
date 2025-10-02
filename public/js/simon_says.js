@@ -18,7 +18,6 @@ document.addEventListener("keypress",function(){
     }
 });
 
-// Start game on touch for mobile/tablet
 document.addEventListener("touchstart", function() {
     if (!started) {
         console.log("Game started via touch");
@@ -26,7 +25,7 @@ document.addEventListener("touchstart", function() {
 
         setTimeout(levelUp, 500);
     }
-}, { once: true }); // ensures it only triggers once
+}, { once: true }); 
 
 
 function levelUp(){
@@ -97,9 +96,8 @@ function checkHighestScore(){
 
 function changeText(event, link) {
             link.textContent = link.textContent + " (clicked)";
-            // Let the browser continue navigation after a short delay
             setTimeout(() => {
                 window.location.href = link.getAttribute("href");
             }, 200);
-            event.preventDefault(); // prevent immediate navigation
+            event.preventDefault(); 
 }

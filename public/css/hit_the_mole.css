@@ -1,0 +1,104 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* Heading */
+h1 {
+    margin: 20px 0;
+    font-size: 2rem;
+}
+
+/* Game info (Level, Timer, Score, Target) */
+#game-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* Game board container */
+#game-board {
+    width: 90%;
+    max-width: 1000px;
+    height: 650px;
+    margin: 0 auto;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 2%;
+}
+
+/* Responsive background images */
+@media (min-width: 769px) {
+    #game-board {
+        background-image: url('../images/whack_the_mole_w.jpg');
+    }
+}
+
+@media (max-width: 768px) {
+    #game-board {
+
+        background-image: url('../images/whack_the_mole_m.jpg');
+    }
+}
+
+/* Hole grid container */
+.hole-grid {
+    display: grid;
+    gap: 6px; /* spacing between holes */
+    justify-content: center;
+    align-content: end; /* aligns holes at bottom */
+}
+
+/* Individual hole */
+.hole {
+    aspect-ratio: 1 / 1;
+    background-color: black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Mole styling */
+.mole {
+    position: absolute;
+    bottom: -100%; /* hide mole initially */
+    transition: bottom 0.25s ease-out; /* smooth pop-up */
+    pointer-events: auto;
+}
+
+/* Mole visible */
+.mole.up {
+    bottom: 0%; /* mole pops up fully */
+}
+
+/* Game message (Game Over / Level Completed) */
+#message {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #e53935;
+    min-height: 24px; /* keeps layout from jumping */
+}
+
+/* Scoreboard spans styling (optional enhancement) */
+#level, #timer, #score, #target {
+    font-weight: bold;
+    color: #333;
+}
