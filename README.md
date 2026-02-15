@@ -12,7 +12,6 @@ Fun brain games to train your memory, focus, and reflexes. This project includes
   3. After every correct attempt, the sequence gets longer.
   4. If you make a mistake, the game ends.
 - **Goal:** Remember and follow as long a sequence as possible.
-- **Play:** [Simon Says](http://localhost:8080/simon_says)
 
 ### 2. Hit the Mole
 - **Description:** Hit the Mole is a fast reaction game that trains your hand-eye coordination and reflexes. It improves attention, response speed, and motor skills.
@@ -23,7 +22,6 @@ Fun brain games to train your memory, focus, and reflexes. This project includes
   4. Each successful hit gives you points.
   5. As levels increase, moles appear and disappear faster.
 - **Goal:** Test your reflexes and score as high as you can.
-- **Play:** [Hit the Mole](http://localhost:8080/hit_the_mole)
 
 ### 3. Match the Cards
 - **Description:** Match the Cards is a memory game that strengthens visual memory and concentration. By remembering positions of cards, it enhances short-term memory and pattern recognition.
@@ -34,7 +32,6 @@ Fun brain games to train your memory, focus, and reflexes. This project includes
   4. If they don’t match, they flip back down.
   5. Continue until all pairs are matched.
 - **Goal:** Use memory to match all the cards in the fewest moves.
-- **Play:** [Match the Cards](http://localhost:8080/match_the_cards)
 
 ### 4. Word Recall
 - **Description:** Word Recall is a word memory game that tests your ability to memorize and recall words. It improves memory retention, attention to detail, and cognitive processing speed.
@@ -44,7 +41,6 @@ Fun brain games to train your memory, focus, and reflexes. This project includes
   3. After the words disappear, recall and type them correctly.
   4. You get points for each correct word recalled.
 - **Goal:** Improve memory retention and recall speed.
-- **Play:** [Word Recall](http://localhost:8080/word_recall)
 
 ## Installation
 
